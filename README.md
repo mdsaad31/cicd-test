@@ -37,4 +37,73 @@ Click:
 If you see Hello from Docker!, Jenkins can run containers.
 
 
-Labsheet 9 and 10:
+Labsheet 9:
+Step 4:  Create New Jenkins Job 
+Go to Jenkins Dashboard 
+Click New Item 
+Enter name → JUnit-Test-Project 
+Select → Freestyle Project 
+Click OK
+Step 5: Configure
+Source Code Management:
+Git (enable option)
+
+Repository URL: copy Junit repository from your git Hub 
+https://github.com/prachikawalkar5-ui/Junit-Testing.git
+
+Branch Specifier: */main
+Triggers: Enable trigger build remotely 
+	        Copy given path into text field 
+
+Build Steps:
+Add Build Step "Invoke top-level maven targets" (Install maven directly & give name)
+Maven Version: Maven 3
+Goals:
+Type command “ clean install”
+mvn clean
+mvn package } clean install / package
+mvn install (m2 repository)
+
+Advanced: give pom.xml path from given repository
+Eg: calculator/pom.xml
+
+Apply OK and save
+
+Labsheet 10:
+Step I: Jenkins with Java Project (Maven)
+Open Jenkins
+New Item : Give any Name 
+Type of Project: Freestyle Project
+OK
+
+Step II: Configure
+Source Code Management:
+Git (enable option)
+
+Repository URL: copy any repository from your git Hub( make sure its must be maven java project : search for pom.xml file)
+ http://github.com/peachikawalla/5-ui/web-mini-project.git
+
+Branch Specifier: */main
+Build Steps:
+Add Build Step "Invoke top-level maven targets" (Install maven directly & give name)
+Maven Version: Maven 3
+Goals:
+Type command “ clean install package”
+mvn clean
+mvn package } clean install / package
+mvn install (m2 repository)
+
+Advanced: give pom.xml path from given repository
+Eg: calculator/pom.xml
+
+Apply OK and save
+
+Build your project: 
+ Build Success 
+java -jar calculator-0.0.1-SNAPSHOT.jar
+
+Step VII: jd-gui Install
+Install jd-gui (Java Decompiler GUI). 
+Open JAR file into jd-gui.
+Step VIII: O/P Show
+pom.xml
