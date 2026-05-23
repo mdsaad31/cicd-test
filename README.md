@@ -107,3 +107,149 @@ Install jd-gui (Java Decompiler GUI).
 Open JAR file into jd-gui.
 Step VIII: O/P Show
 pom.xml
+
+
+labsheet 10 (script):
+
+pipeline {
+
+agent any
+
+stages {
+
+stage('Trigger Freestyle Project') {
+
+steps {
+
+echo "Triggering Java-Freestyle-Project..."
+
+script {
+
+def buildInfo = build job: 'Junit Testing Project', wait: true
+
+
+echo "Freestyle Build Number: ${buildInfo.number}"
+
+echo "Freestyle Build Status: ${buildInfo.result}"
+
+
+if (buildInfo.result != 'SUCCESS') {
+
+error "Freestyle project failed!"
+
+} } } }
+
+stage('Result') {
+
+steps {
+
+echo "Git Fetch + Build + Test executed successfully!"
+
+echo "Check Java-Freestyle-Project for JUnit results."
+
+} } } }
+
+
+labsheet 12 (script):#we have to change this accordingly to u repo because we are using ma'am repo details here.
+
+
+pipeline {
+
+agent any
+
+tools {
+
+maven "Maven3"
+
+}
+
+environment {
+
+IMAGE_NAME = "add-two-number-app"
+
+}
+
+stages {
+
+stage('Checkout Code') {
+
+steps {
+
+git branch: 'main',
+
+url: 'https://github.com/prachikawalkar5-ui/web-mini-project.git'
+
+}
+
+}
+
+stage('Build Maven Project') {
+
+steps {
+
+dir('calculator') {
+
+bat 'mvn clean package -DskipTests'
+
+}
+
+}
+
+}
+
+stage('Check Docker') {
+
+steps {
+
+bat 'docker --version'
+
+}
+
+}
+
+stage('Build Docker Image') {
+
+steps {
+
+dir('calculator') {
+
+bat 'docker build --no-cache -t add-two-number-app .'
+
+}
+
+}
+
+}
+
+stage('Run Container') {
+
+steps {
+
+bat 'docker rm -f addtwo-container || exit 0'
+
+bat 'docker run -d --name addtwo-container -p 9090:8080 add-two-number-app'
+
+}
+
+}
+
+}
+
+post {
+
+success {
+
+echo 'Pipeline executed successfully!'
+
+}
+
+
+failure {
+
+echo 'Pipeline failed. Check logs!'
+
+}
+
+}
+
+}
