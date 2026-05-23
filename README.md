@@ -53,7 +53,7 @@ https://github.com/prachikawalkar5-ui/Junit-Testing.git
 
 Branch Specifier: */main
 Triggers: Enable trigger build remotely 
-	        Copy given path into text field 
+	        Copy given path into text field(in automation only needed not need in any other like unit testing) 
 
 Build Steps:
 Add Build Step "Invoke top-level maven targets" (Install maven directly & give name)
