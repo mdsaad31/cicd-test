@@ -23,11 +23,11 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      # Step 3: Compile Java code
-      - name: Compile Java
-        run: javac *.java
+      # Step 3: Build and test with Maven
+      - name: Build and test
+        run: mvn -B -ntp test
 
       # Step 4: Run main class
       - name: Run Java program
-        run: java Add #give the file name
+        run: mvn -B -ntp -DskipTests exec:java
         
